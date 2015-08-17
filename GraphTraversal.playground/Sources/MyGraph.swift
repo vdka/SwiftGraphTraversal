@@ -3,8 +3,14 @@ import Foundation
 public class Vertex: Hashable, Equatable, CustomStringConvertible, CustomDebugStringConvertible {
 	//A Vertex is required to have a unique name.
 	var name: String
+	var hCost: Int?
 	init (_ name: String) {
 		self.name = name
+	}
+	
+	init (_ name: String, hCost: Int) {
+		self.name = name
+		self.hCost = hCost
 	}
 	
 	public var hashValue: Int {

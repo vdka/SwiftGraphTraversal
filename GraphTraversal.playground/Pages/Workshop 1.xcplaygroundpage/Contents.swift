@@ -1,9 +1,7 @@
-import Foundation
-
 //NOTE: Each Vertex is required to have a unique name. Behaviour without unique names is undefined.
 //		This is a result of how equaltiy for nodes are checked.
 
-var graph = Graph()
+public var graph = Graph()
 
 let sNode = graph.addVertex("S")
 let aNode = graph.addVertex("A")
@@ -20,13 +18,6 @@ graph.addEdge(bNode, neighbour: cNode, weight: 5)
 graph.addEdge(bNode, neighbour: dNode, weight: 7)
 graph.addEdge(dNode, neighbour: gNode, weight: 6)
 
-graph.adjacent(sNode, neighbour: aNode)
-graph.adjacent(sNode, neighbour: cNode)
-
-graph.neighbours(dNode)
-
 graph.breadthFirstSearch(sNode, dest: gNode)
 graph.depthFirstSearch(sNode, dest: gNode)
 graph.dijkstra(sNode, dest: gNode)
-
-
