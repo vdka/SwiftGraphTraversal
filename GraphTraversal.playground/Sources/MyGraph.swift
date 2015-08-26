@@ -3,14 +3,8 @@ import Foundation
 public class Vertex: Hashable, Equatable, CustomStringConvertible, CustomDebugStringConvertible {
 	//A Vertex is required to have a unique name.
 	var name: String
-	var hCost: Int?
 	init (_ name: String) {
 		self.name = name
-	}
-	
-	init (_ name: String, hCost: Int) {
-		self.name = name
-		self.hCost = hCost
 	}
 	
 	public var hashValue: Int {
@@ -32,7 +26,8 @@ public func ==(lhs: Vertex, rhs: Vertex) -> Bool {
 
 public class Graph {
 	//follows the adjacency matrix format.
-	var vertices: [Vertex] = []
+//	var vertices: [Vertex] = []
+    var vertDict: [String: Vertex] = [:]
 	
 	typealias Edge = (destination: Vertex, weight: Int)
 	var edges: [Vertex: [Edge]] = [:]
@@ -41,10 +36,28 @@ public class Graph {
 	
 	public func addVertex(name: String) -> Vertex {
 		let newVertex = Vertex(name)
+        vertDict[name] = newVertex
 		
-		vertices.append(newVertex)
+//		vertices.append(newVertex)
 		return newVertex
 	}
+    
+    public func vertexForName(name: String) -> Vertex? {
+        return vertDict[name]
+    }
+    
+	public func addEdge(source: String, neighbour: String, weight: Int = 1) {
+        guard let sourceVertex = vertDict[source] else {
+            print("New edge failed to add non existant vertex provided")
+            return
+        }
+        guard let neighbourVertex = vertDict[neighbour] else {
+            print("New edge failed to add non existant vertex provided")
+            return
+        }
+     
+        return addEdge(sourceVertex, neighbour: neighbourVertex)
+    }
 	
 	public func addEdge(source: Vertex, neighbour: Vertex, weight: Int = 1) {
 		let newEdge = (destination: neighbour, weight: weight)
@@ -62,6 +75,19 @@ public class Graph {
 		}
 		
 	}
+    
+    public func adjacent(source: String, neighbour: String) -> Bool {
+        guard let sourceVertex = vertDict[source] else {
+            print("New edge failed to add non existant vertex provided")
+            return false
+        }
+        guard let neighbourVertex = vertDict[neighbour] else {
+            print("New edge failed to add non existant vertex provided")
+            return false
+        }
+     
+        return adjacent(sourceVertex, neighbour: neighbourVertex)
+    }
 	
 	public func adjacent(source: Vertex, neighbour: Vertex) -> Bool {
 		let surrounding = neighbours(source)
@@ -72,6 +98,15 @@ public class Graph {
 		
 		return false
 	}
+    
+    public func neighbours(source: String) -> [Vertex] {
+        guard let sourceVertex = vertDict[source] else {
+            print("Vertex not in graph \(source)")
+            return []
+        }
+        
+        return neighbours(sourceVertex)
+    }
 	
 	public func neighbours(source: Vertex) -> [Vertex] {
 		var found = [Vertex]()
@@ -135,7 +170,7 @@ public class Graph {
 			pathStr += "\($0) -> "
 		}
 		
-		return pathStr.substringToIndex(advance(pathStr.endIndex, -4)) + ". steps: \(distance[dest]!)"
+		return pathStr.substringToIndex(pathStr.endIndex.advancedBy(-4)) + ". steps: \(distance[dest]!)"
 	}
 	
 	public func depthFirstSearch(source: Vertex, dest: Vertex) -> String {
@@ -173,7 +208,7 @@ public class Graph {
 			pathStr += "\($0) -> "
 		}
 		
-		return pathStr.substringToIndex(advance(pathStr.endIndex, -4)) + ". steps: \(distance[dest]!)"
+		return pathStr.substringToIndex(pathStr.endIndex.advancedBy(-4)) + ". steps: \(distance[dest]!)"
 	}
 	
 	public func dijkstra(source: Vertex, dest: Vertex) -> String {
@@ -183,7 +218,7 @@ public class Graph {
 		
 		let pq = PriorityQueue<Vertex>()
 		
-		vertices.forEach {
+        vertDict.values.forEach {
 			if $0 != source {
 				distance[$0] = Int.max
 			}
@@ -218,6 +253,7 @@ public class Graph {
 			pathStr += "\($0) -> "
 		}
 		
-		return pathStr.substringToIndex(advance(pathStr.endIndex, -4)) + ". cost: \(distance[dest]!)"
+		return pathStr.substringToIndex(pathStr.endIndex.advancedBy(-4)) + ". cost: \(distance[dest]!)"
+        
 	}
 }

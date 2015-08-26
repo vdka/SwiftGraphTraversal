@@ -7,18 +7,18 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>74923B78-C1C6-4EBF-AD4D-5D6E2ADBA25F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>GraphTraversal</string>
+	<string>playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>45099B8A976A70E69F40C2D56B986E52BE89CF1C</key>
 		<string>github.com:VDKA/SwiftGraphTraversal.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GraphTraversal.playground</string>
+	<string>GraphTraversal.playground/playground.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>45099B8A976A70E69F40C2D56B986E52BE89CF1C</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:VDKA/SwiftGraphTraversal.git</string>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>45099B8A976A70E69F40C2D56B986E52BE89CF1C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Week%201</string>
+			<string>Code</string>
 		</dict>
 	</array>
 </dict>

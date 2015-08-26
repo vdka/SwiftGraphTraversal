@@ -56,7 +56,7 @@ public extension Graph {
 			pathStr += "\($0) -> "
 		}
 		if destinationFound {
-    		return pathStr.substringToIndex(advance(pathStr.endIndex, -4)) + ". cost: \(distance[dest]!)"
+    		return pathStr.substringToIndex(pathStr.endIndex.advancedBy(-4)) + ". cost: \(distance[dest]!)"
 		} else {
 			return "Destination not found!"
 		}
